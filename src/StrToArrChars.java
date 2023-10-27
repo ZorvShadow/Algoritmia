@@ -23,7 +23,13 @@ public class StrToArrChars {
 
         System.out.print("Ingresa una cadena a convertir: ");
         char[] cadena = strToChar(scanner.nextLine());
-        String arrStr = Arrays.toString(cadena);
+
+        String[] cadenaComas = new String[cadena.length];
+        for (int i = 0; i < cadena.length; i++) {
+            cadenaComas[i] = "'" + cadena[i] + "'";
+        }
+
+        String arrStr = Arrays.toString(cadenaComas);
 
         System.out.println("char[] cadena = {" + arrStr.substring(1, arrStr.length() - 1) + "}");
 
