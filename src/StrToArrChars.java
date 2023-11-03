@@ -31,7 +31,7 @@ public class StrToArrChars {
 
         String arrStr = Arrays.toString(cadenaComas);
 
-        System.out.println("char[] cadena = {" + arrStr.substring(1, arrStr.length() - 1) + "}");
+        System.out.println("char[] cadena = {" + arrStr.substring(1, arrStr.length() - 1) + "};");
 
     }
 }
