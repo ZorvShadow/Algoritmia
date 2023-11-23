@@ -1,6 +1,31 @@
 import java.util.Scanner;
 
 public class CuentaVocales {
+    public static void printChars(char[] cadena) {
+        for (int i = 0; i < cadena.length; i++) {
+            if (cadena[i] == 0)
+                break;
+            System.out.print(cadena[i]);
+        }
+    }
+
+    public static char[] strToChar(String mensaje) {
+        char[] finalArr = new char[mensaje.length() + 1];
+
+        for (int i = 0; i < mensaje.length(); i++) {
+            finalArr[i] = mensaje.charAt(i);
+        }
+
+        finalArr[mensaje.length()] = 0;
+        return finalArr;
+    }
+
+    public static char[] readChars(char[] mensaje) {
+        printChars(mensaje);
+        String auxiliar = new Scanner(System.in).nextLine();
+        return strToChar(auxiliar);
+    }
+
     public static int[] contarCaracteres(char[] cadena) {
         // vocales, signos, minusculas y mayusculas
         // 5 vocales, 1 de signos, 1 de mins, 1 de mayus
@@ -59,30 +84,7 @@ public class CuentaVocales {
         return cuenta;
     }
 
-    public static void printChars(char[] cadena) {
-        for (int i = 0; i < cadena.length; i++) {
-            if (cadena[i] == 0)
-                break;
-            System.out.print(cadena[i]);
-        }
-    }
 
-    public static char[] strToChar(String mensaje) {
-        char[] finalArr = new char[mensaje.length() + 1];
-
-        for (int i = 0; i < mensaje.length(); i++) {
-            finalArr[i] = mensaje.charAt(i);
-        }
-
-        finalArr[mensaje.length()] = 0;
-        return finalArr;
-    }
-
-    public static char[] readChars(char[] mensaje) {
-        printChars(mensaje);
-        String auxiliar = new Scanner(System.in).nextLine();
-        return strToChar(auxiliar);
-    }
 
     public static void main(String[] args) {
         char[] cadena = readChars(new char[]{'I', 'n', 'g', 'r', 'e', 's', 'a', ' ', 'u', 'n', 'a', ' ', 'c', 'a', 'd', 'e', 'n', 'a', ' ', 'd', 'e', ' ', 't', 'e', 'x', 't', 'o', ':', ' '});
