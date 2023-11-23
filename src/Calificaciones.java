@@ -9,7 +9,6 @@ public class Calificaciones {
             newArr[i] = arr[i];
         }
         if (newArr.length != 0) {
-            System.out.println("suma = " + suma);
             suma += sumaArr(newArr);
         }
 
