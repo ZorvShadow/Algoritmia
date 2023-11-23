@@ -8,13 +8,12 @@ public class StrToArrChars {
      */
 
     public static char[] strToChar(String mensaje) {
-        char[] finalArr = new char[mensaje.length() + 1];
+        char[] finalArr = new char[mensaje.length()];
 
         for (int i = 0; i < mensaje.length(); i++) {
             finalArr[i] = mensaje.charAt(i);
         }
 
-        finalArr[mensaje.length()] = 0;
         return finalArr;
     }
 
