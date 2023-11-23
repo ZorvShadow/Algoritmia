@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SumarMatrices {
@@ -49,6 +50,35 @@ public class SumarMatrices {
         return new int[][]{sumaCols, sumaFilas};
     }
 
+    public static int[][] multiplicarColsFilasMatrizBidimensional(int[][] matriz) {
+        int[] multiCols = new int[matriz[0].length];
+        int[] multiFilas = new int[matriz.length];
+        Arrays.fill(multiCols, 1);
+        Arrays.fill(multiFilas, 1);
+
+        for (int y = 0; y < matriz.length; y++) {
+            for (int x = 0; x < matriz[y].length; x++) {
+                multiCols[x] *= matriz[y][x];
+                multiFilas[y] *= matriz[y][x];
+            }
+
+        }
+
+        return new int[][]{multiCols, multiFilas};
+    }
+
+    public static int[] multiplicarDiagonalesMatrizBidimensional(int[][] matriz) {
+        int[] multiDiags = new int[]{1, 1};
+        multiDiags[0] *= matriz[matriz.length - 1][matriz[0].length - 1];
+        System.out.println("Arrays.toString(multiDiags) = " + Arrays.toString(multiDiags));
+
+        for (int i = 0; i < matriz.length; i++) {
+            multiDiags[1] *= matriz[i][matriz.length - 1 - i];
+            multiDiags[0] *= matriz[i][i];
+        }
+        return multiDiags;
+    }
+
     public static int[] sumarDiagonalesMatrizBidimensional(int[][] matriz) {
         int[] sumaDiags = new int[2];
         sumaDiags[0] += matriz[matriz.length - 1][matriz[0].length - 1];
@@ -81,13 +111,17 @@ public class SumarMatrices {
         for (int y = 0; y < matriz.length; y++) {
             for (int x = 0; x < matriz[y].length; x++) {
                 System.out.printf("Ingrese el valor en la fila %d y columna %d: ", x + 1, y + 1);
-                matriz[y][x] = scanner.nextInt();
+                //matriz[y][x] = scanner.nextInt();
+                matriz[y][x] = (int) (Math.random() * 10);
+                System.out.println(matriz[y][x]);
             }
             System.out.println();
         }
 
         int[][] sumaColsFilas = sumarColsFilasMatrizBidimensional(matriz);
         int[] sumaDiags = sumarDiagonalesMatrizBidimensional(matriz);
+        int[][] multiColsFilas = multiplicarColsFilasMatrizBidimensional(matriz);
+        int[] multiDiags = multiplicarDiagonalesMatrizBidimensional(matriz);
 
         System.out.println("\nTu cuadrado es el siguiente: ");
 
@@ -111,6 +145,17 @@ public class SumarMatrices {
 
         printChars(new char[]{'\n', 'L', 'a', ' ', 's', 'u', 'm', 'a', ' ', 'd', 'e', ' ', 'l', 'a', ' ', 's', 'e', 'g', 'u', 'n', 'd', 'a', ' ', 'd', 'i', 'a', 'g', 'o', 'n', 'a', 'l', ' ', 'e', 's', ' '});
         System.out.println(sumaDiags[1]);
+
+        System.out.println("Las multiplicaciones de las filas son: ");
+        for (int i = 0; i < multiColsFilas[1].length; i++) {
+            System.out.printf("%-4d %-5d\n", i + 1, multiColsFilas[1][i]);
+        }
+
+        System.out.println("La multiplicacion de la primera diagonal es: ");
+        System.out.println(multiDiags[0]);
+
+        System.out.println("La multiplicacion de la segunda diagonal es: ");
+        System.out.println(multiDiags[1]);
 
         int[] indiceMayor = encontrarIndexMayor(sumaColsFilas);
         int valorMayor = sumaColsFilas[indiceMayor[0]][indiceMayor[1]];

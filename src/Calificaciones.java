@@ -17,19 +17,19 @@ public class Calificaciones {
 
 
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         float sumaGeneral = 0;
 
         System.out.print("Cuántas calificaciones vas a ingresar: ");
-        int largo = leer.nextInt();
+        int largo = scanner.nextInt();
 
         float[] califs = new float[largo];
         float[] proms = new float[8];
 
         for (int i = 0; i < largo; i++) {
             System.out.print("Ingresa la calificación " + (i + 1) + ": ");
-            califs[i] = leer.nextFloat();
+            califs[i] = scanner.nextFloat();
 
             sumaGeneral = sumaGeneral + califs[i];
 
