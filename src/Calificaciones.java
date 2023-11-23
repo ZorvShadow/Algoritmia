@@ -3,16 +3,15 @@ import java.util.Scanner;
 public class Calificaciones {
 
     public static float sumaArr(float[] arr) {
+        if (arr.length == 0) return 0;
+
         float suma = arr[arr.length - 1];
         float[] newArr = new float[arr.length - 1];
         for (int i = 0; i < newArr.length; i++) {
             newArr[i] = arr[i];
         }
-        if (newArr.length != 0) {
-            suma += sumaArr(newArr);
-        }
 
-        return suma;
+        return suma + sumaArr(newArr);
 
     }
 
