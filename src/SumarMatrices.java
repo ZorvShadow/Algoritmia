@@ -9,6 +9,22 @@ public class SumarMatrices {
         }
     }
 
+    public static int[] encontrarIndexMayor(int[][] matriz) {
+        int max = Integer.MIN_VALUE; // Una constante proporcionada por Java para que funcione con cualquier numero
+        int[] index = new int[2];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] > max) {
+                    max = matriz[i][j];
+
+                    index[0] = i;
+                    index[1] = j;
+                }
+            }
+        }
+        return index;
+    }
+
     public static void printMatrizBidimensional(int[][] matriz) {
         for (int y = 0; y < matriz.length; y++) {
             for (int x = 0; x < matriz[y].length; x++) {
@@ -64,11 +80,10 @@ public class SumarMatrices {
 
         for (int y = 0; y < matriz.length; y++) {
             for (int x = 0; x < matriz[y].length; x++) {
-                System.out.printf("Ingrese el valor en posición (%2d, %-2d): ", x, y);
-                //matriz[y][x] = scanner.nextInt();
-                matriz[y][x] = (int) (Math.random() * 10);
-                System.out.println(matriz[y][x]);
+                System.out.printf("Ingrese el valor en la fila %d y columna %d: ", x + 1, y + 1);
+                matriz[y][x] = scanner.nextInt();
             }
+            System.out.println();
         }
 
         int[][] sumaColsFilas = sumarColsFilasMatrizBidimensional(matriz);
@@ -97,6 +112,28 @@ public class SumarMatrices {
         printChars(new char[]{'\n', 'L', 'a', ' ', 's', 'u', 'm', 'a', ' ', 'd', 'e', ' ', 'l', 'a', ' ', 's', 'e', 'g', 'u', 'n', 'd', 'a', ' ', 'd', 'i', 'a', 'g', 'o', 'n', 'a', 'l', ' ', 'e', 's', ' '});
         System.out.println(sumaDiags[1]);
 
+        int[] indiceMayor = encontrarIndexMayor(sumaColsFilas);
+        int valorMayor = sumaColsFilas[indiceMayor[0]][indiceMayor[1]];
+        if (valorMayor < sumaDiags[0]) {
+            valorMayor = sumaDiags[0];
+            indiceMayor = new int[]{2};
+        } else if (valorMayor < sumaDiags[1]) {
+            valorMayor = sumaDiags[1];
+            indiceMayor = new int[]{3};
+        }
+        if (indiceMayor.length == 1) {
+            System.out.printf("La suma mayor es la de la diagonal %d", indiceMayor[0] - 1);
+        } else {
+            switch (indiceMayor[0]) {
+                case 0:
+                    System.out.printf("La suma mayor está en la fila %d", indiceMayor[1] + 1);
+                    break;
+                case 1:
 
+                    System.out.printf("La suma mayor está en la columna %d", indiceMayor[1] + 1);
+                    break;
+            }
+        }
+        System.out.printf(" con un valor de %d.", valorMayor);
     }
 }
