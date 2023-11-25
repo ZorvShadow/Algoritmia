@@ -2,35 +2,25 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class StrToArrChars {
-    /**
-     * @param mensaje Cadena de texto a convertir.
-     * @return Arreglo de carácteres.
-     */
-
-    public static char[] strToChar(String mensaje) {
-        char[] finalArr = new char[mensaje.length()];
-
-        for (int i = 0; i < mensaje.length(); i++) {
-            finalArr[i] = mensaje.charAt(i);
-        }
-
-        return finalArr;
-    }
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Ingresa una cadena a convertir: ");
-        char[] cadena = strToChar(scanner.nextLine());
+            System.out.print("Ingresa una cadena a convertir: ");
+            char[] cadena = (scanner.nextLine().toCharArray());
 
-        String[] cadenaComas = new String[cadena.length];
-        for (int i = 0; i < cadena.length; i++) {
-            cadenaComas[i] = "'" + cadena[i] + "'";
+            String[] cadenaComas = new String[cadena.length];
+            for (int i = 0; i < cadena.length; i++) {
+                cadenaComas[i] = "'" + cadena[i] + "'";
+            }
+
+            String arrStr = Arrays.toString(cadenaComas);
+
+            System.out.println("char[] cadena = new char[]{" + arrStr.substring(1, arrStr.length() - 1) + "};");
+
+            System.out.print("Desea ingresar otro? (s/n) ");
+
+            if (scanner.next().toLowerCase().charAt(0) != 's') break;
         }
-
-        String arrStr = Arrays.toString(cadenaComas);
-
-        System.out.println("char[] cadena = {" + arrStr.substring(1, arrStr.length() - 1) + "};");
-
     }
 }
