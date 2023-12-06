@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 /**
  * @author García Espino Enrique Román
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class Listas {
+
     private static String[] conciertos = {"Concierto 1", "Concierto 2", "Concierto 3", "Concierto 4", "Concierto 5"};
     private static Boleto[] boletos = new Boleto[conciertos.length];
 
@@ -26,8 +27,9 @@ public class Listas {
 
             valido = (eleccion || respuesta.charAt(0) == 'n') && respuesta.length() == 1;
 
-            if (!valido) System.out.println("Respuesta inválida!!");
-
+            if (!valido) {
+                System.out.println("Respuesta inválida!!");
+            }
 
         }
 
@@ -44,7 +46,9 @@ public class Listas {
                 num = scanner.nextInt();
                 valido = num <= max && num >= min;
 
-                if (!valido) System.out.println("Respuesta inválida!!");
+                if (!valido) {
+                    System.out.println("Respuesta inválida!!");
+                }
             } else {
                 scanner.next();
                 System.out.println("Ingresa un número entero.");
@@ -61,8 +65,12 @@ public class Listas {
      * @return Cadena de texto resultante.
      */
     private static String charArrToString(char[] cadena) {
-        if (cadena == null) return null;
-        if (cadena.length == 0) return "";
+        if (cadena == null) {
+            return null;
+        }
+        if (cadena.length == 0) {
+            return "";
+        }
 
         String nuevo = "";
         for (int i = 0; i < cadena.length; i++) {
@@ -75,16 +83,27 @@ public class Listas {
      * @param boleto Boleto base o inicial
      */
     private static void printBoletos(Boleto boleto) {
-        if (boleto == null) return;
-        if (boleto.getNombreBoleto() == null) return;
-
-        Boleto aux = boleto;
-        System.out.printf("%-5s | %-20s\n", "Núm", "Nombre");
-        System.out.println("----------------");
-        while (aux != null) {
-            System.out.printf("%-5d | %-20s\n", aux.getNumeroBoleto(), charArrToString(aux.getNombreBoleto()));
-            aux = aux.getSiguiente();
+        if (boleto == null) {
+            return;
         }
+        if (boleto.getNombreBoleto() == null) {
+            return;
+        }
+        System.out.printf("%-5d | %-20s\n", boleto.getNumeroBoleto(), charArrToString(boleto.getNombreBoleto()));
+        printBoletos(boleto.getSiguiente());
+
+    }
+    
+    /**
+     * @param boleto Boleto base o inicial
+     */
+    private static void printBoletosV2(Boleto boleto) {
+        if (boleto == null) return;
+        
+        if (boleto.getNombreBoleto() == null) return;
+        
+        printBoletosV2(boleto.getSiguiente());
+        System.out.printf("%-5d | %-20s\n", boleto.getNumeroBoleto(), charArrToString(boleto.getNombreBoleto()));
 
     }
 
@@ -93,13 +112,21 @@ public class Listas {
      * @return Boleto final, sin siguiente.
      */
     private static Boleto getLastElement(Boleto inicial) {
-        if (inicial == null) return null;
-        if (inicial.getNombreBoleto() == null) return null;
-        if (inicial.getSiguiente() == null) return inicial;
+        if (inicial == null) {
+            return null;
+        }
+        if (inicial.getNombreBoleto() == null) {
+            return null;
+        }
+        if (inicial.getSiguiente() == null) {
+            return inicial;
+        }
         Boleto aux = inicial;
 
         while (aux.getSiguiente() != null) {
-            if (aux.getSiguiente() != null) aux = aux.getSiguiente();
+            if (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
         }
         return aux;
 
@@ -107,10 +134,12 @@ public class Listas {
 
     /**
      * @param inicial Boleto inicial o base
-     * @param nombre  Nombre de la persona del boleto
+     * @param nombre Nombre de la persona del boleto
      */
     private static void addBoleto(Boleto inicial, char[] nombre) {
-        if (inicial == null) return;
+        if (inicial == null) {
+            return;
+        }
 
         Boleto ultimo = getLastElement(inicial);
 
@@ -145,7 +174,7 @@ public class Listas {
 
         Notas:
             Hacer 5 listas diferentes, 1 para cada concierto.
-        */
+         */
         // Inicializar boletos
 
         for (int i = 0; i < boletos.length; i++) {
@@ -212,8 +241,17 @@ public class Listas {
 
             int conciertoSeleccionado = inputIntValido(1, conciertos.length, "¿Qué número de concierto desea? ", scanner) - 1;
             Boleto boleto = boletos[conciertoSeleccionado];
-            if (boleto.getNombreBoleto() == null) System.out.println("No hay boletos comprados en este concierto ");
-            else printBoletos(boleto);
+            if (boleto.getNombreBoleto() == null) {
+                System.out.println("No hay boletos comprados en este concierto ");
+            } else {
+                System.out.println("Cola: ");
+                System.out.printf("%-5s | %-20s\n", "Núm", "Nombre");
+                printBoletosV2(boleto);
+                
+                System.out.println("\nPila: ");
+                System.out.printf("%-5s | %-20s\n", "Núm", "Nombre");
+                printBoletos(boleto);
+            }
 
             activo = preguntarSiNo("¿Desea desplegar otro concierto?", scanner);
         }
